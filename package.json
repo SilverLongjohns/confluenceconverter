@@ -1,0 +1,17 @@
+{
+  "name": "confluenceconverter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@shogobg/markdown2confluence": "^0.1.4",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  }
+}
