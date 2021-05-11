@@ -8,26 +8,41 @@ function getMarkdownFiles(directory) {
         const arrayOfFiles = fs.readdirSync(directory)
         console.log(arrayOfFiles)
         let file;
-        if (!fs.existsSync(dirConverted && dirSource)){
-            fs.mkdirSync(dirConverted);
-            fs.mkdirSync(dirSource);
-        }
+        let arrayOfMarkdown = [];
+
         for(file in arrayOfFiles) {
-            const current = directory + "/" + arrayOfFiles[file];
-            const future = directory + "/converted/" + arrayOfFiles[file];
             if(!arrayOfFiles[file].startsWith(".") && arrayOfFiles[file].endsWith(".md")) {
                 try {
-                    fs.copyFileSync(current, future);
-                    console.log("File " + arrayOfFiles[file] + " successfully copied");
+                    arrayOfMarkdown.push(arrayOfFiles[file]);
                 } catch (err) {
                     console.log(err);
                     throw(err);
                 }
             }
         }
-        return arrayOfFiles
+
+        if(arrayOfMarkdown === []){throw new Error("No markdown detected.")}
+
+        if (!fs.existsSync(dirConverted && dirSource)){
+            fs.mkdirSync(dirConverted);
+            fs.mkdirSync(dirSource);
+        }
+
+        for(file in arrayOfMarkdown) {
+            const current = directory + "/" + arrayOfMarkdown[file];
+            const future = directory + "/converted/" + arrayOfMarkdown[file];
+            try {
+                fs.copyFileSync(current, future);
+                console.log("File " + arrayOfMarkdown[file] + " successfully copied");
+            } catch (err) {
+                console.log(err);
+                throw(err);
+            }
+        }
+
+        return arrayOfMarkdown
     } catch (e) {
-        console.log(e)
+        console.log(e);
     }
 }
 
