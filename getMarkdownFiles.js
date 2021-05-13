@@ -3,7 +3,6 @@ const fs = require("fs")
 function getMarkdownFiles(directory) {
     // Create a source folder for cleanliness
     const dirConverted = directory + "/converted"
-    const dirSource = directory + "/source"
     try {
         const arrayOfFiles = fs.readdirSync(directory)
         console.log(arrayOfFiles)
@@ -23,9 +22,8 @@ function getMarkdownFiles(directory) {
 
         if(arrayOfMarkdown === []){throw new Error("No markdown detected.")}
 
-        if (!fs.existsSync(dirConverted && dirSource)){
+        if (!fs.existsSync(dirConverted)){
             fs.mkdirSync(dirConverted);
-            fs.mkdirSync(dirSource);
         }
 
         for(file in arrayOfMarkdown) {

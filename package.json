@@ -13,5 +13,8 @@
     "@shogobg/markdown2confluence": "^0.1.4",
     "chai": "^4.3.4",
     "mocha": "^8.3.2"
+  },
+  "dependencies": {
+    "confluence-api": "^1.4.0"
   }
 }

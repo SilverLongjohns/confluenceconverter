@@ -12,7 +12,7 @@ describe('getMarkdownFiles', function() {
     it('should create a source and converted folder', function() {
         createTestMarkdown()
         getMarkdownFiles.getMarkdownFiles("./test/");
-        assert.isOk(fs.existsSync("./test/converted" && "./test/source"));
+        assert.isOk(fs.existsSync("./test/converted"));
     })
     it('should throw an error if no MD files are detected', function() {
         assert.throws(() => { getMarkdownFiles.getMarkdownFiles("./test") }, Error, "No markdown detected.")
