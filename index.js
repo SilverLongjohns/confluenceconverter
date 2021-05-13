@@ -1,14 +1,18 @@
 let confluenceConverter = require("./confluenceConverter")
 let getMarkdownFiles = require("./getMarkdownFiles")
-let Confluence = require("confluence-api")
-
-var config = {
-    username: "testuser",
-    password: "test-user-pw-or-rest-api-token",
-    baseUrl:  "https://confluence-api-test.atlassian.net/wiki",
-};
+const fs = require("fs");
 
 const input = "./documentation"
 
-getMarkdownFiles.getMarkdownFiles(input);
-confluenceConverter.confluenceConverter(input);
+let directories = []
+
+    fs.readdirSync(input).forEach(elem => {
+        let currentDir = input + "/" + elem
+        let state = fs.statSync(currentDir)
+        if(state.isDirectory()) directories.push(currentDir);
+});
+
+directories.forEach(folder => {
+    getMarkdownFiles.getMarkdownFiles(folder);
+    confluenceConverter.confluenceConverter(folder);
+});
